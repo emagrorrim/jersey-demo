@@ -18,12 +18,7 @@ import java.util.stream.Collectors;
 @Path("item")
 public class ItemService {
     @Inject
-    private ItemMapper itemMapper;
-
-    ItemService() {}
-    ItemService(ItemMapper itemMapper) {
-        this.itemMapper = itemMapper;
-    }
+    ItemMapper itemMapper;
 
     @GET
     @Path("/all")

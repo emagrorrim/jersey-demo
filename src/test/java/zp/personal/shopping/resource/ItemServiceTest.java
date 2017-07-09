@@ -27,7 +27,8 @@ public class ItemServiceTest {
     public void setUp() throws Exception {
         initMocks(this);
 
-        itemService = new ItemService(itemMapper);
+        itemService = new ItemService();
+        itemService.itemMapper = itemMapper;
     }
 
     @Test
@@ -54,8 +55,8 @@ public class ItemServiceTest {
 
     private List<Item> mockedItems() {
         List<Item> items = new ArrayList<>();
-        Item apple = new Item().setName("Apple");
-        Item knife = new Item().setName("Knife");
+        Item apple = new Item().setId(1).setName("Apple");
+        Item knife = new Item().setId(2).setName("Knife");
         items.add(apple);
         items.add(knife);
         return items;

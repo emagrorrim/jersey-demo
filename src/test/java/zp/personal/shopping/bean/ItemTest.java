@@ -11,9 +11,11 @@ public class ItemTest {
     @Test
     public void creating_new_item_should_return_new_item_with_expected_properties() throws Exception {
         Item item = new Item()
+            .setId(1)
             .setName("Apple");
 
         assertThat(item.getName(), is("Apple"));
+        assertThat(item.getId(), is(1));
     }
 
     @Test

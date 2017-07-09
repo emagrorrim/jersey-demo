@@ -1,0 +1,35 @@
+version: '2'
+services:
+  mysql:
+    image: mysql:latest
+    container_name: shop_database
+    volumes:
+      - ./sql/init_database.sql:/docker-entrypoint-initdb.d/init_database.sql
+    ports:
+      - 3306:3306
+    environment:
+      - LANG=C.UTF-8
+      - TERM=dumb
+      - MYSQL_ROOT_PASSWORD=zp123456
+      - MYSQL_DATABASE=SHOP_DATABASE
+      - MYSQL_PASSWORD=12345678
+      - MYSQL_USER=ZhangPei
+    networks:
+      main:
+        aliases:
+          - mysql
+  shopping-api:
+    image: jetty:latest
+    container_name: shopping_api
+    volumes:
+      - ./build/libs/shopping-api-1.0.war:/var/lib/jetty/webapps/shopping-api.war
+    links:
+      - mysql:mysql
+    ports:
+      - 8080:8080
+    networks:
+      main:
+        aliases:
+          - shopping-api
+networks:
+  main:

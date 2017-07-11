@@ -8,8 +8,15 @@ CREATE TABLE  ITEMS (
     id int not null primary key AUTO_INCREMENT,
     name varchar(100) not null
 );
+DROP TABLE IF EXISTS  CATEGORIES;
+CREATE TABLE  CATEGORIES (
+    id int not null primary key AUTO_INCREMENT,
+    name varchar(100) not null
+);
 
 INSERT INTO ITEMS(name) VALUES("Apple");
-INSERT INTO ITEMS(name) VALUES("Knife");
+INSERT INTO ITEMS(name) VALUES("Pear");
+INSERT INTO CATEGORIES(name) VALUES("Food");
 
 SELECT * FROM SHOP_DATABASE.ITEMS;
+SELECT * FROM SHOP_DATABASE.CATEGORIES;

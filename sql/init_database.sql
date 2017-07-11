@@ -6,7 +6,8 @@ USE SHOP_DATABASE;
 DROP TABLE IF EXISTS  ITEMS;
 CREATE TABLE  ITEMS (
     id int not null primary key AUTO_INCREMENT,
-    name varchar(100) not null
+    name varchar(100) not null,
+    category_id int not null
 );
 DROP TABLE IF EXISTS  CATEGORIES;
 CREATE TABLE  CATEGORIES (
@@ -14,8 +15,8 @@ CREATE TABLE  CATEGORIES (
     name varchar(100) not null
 );
 
-INSERT INTO ITEMS(name) VALUES("Apple");
-INSERT INTO ITEMS(name) VALUES("Pear");
+INSERT INTO ITEMS(name, category_id) VALUES("Apple", 1);
+INSERT INTO ITEMS(name, category_id) VALUES("Pear", 1);
 INSERT INTO CATEGORIES(name) VALUES("Food");
 
 SELECT * FROM SHOP_DATABASE.ITEMS;

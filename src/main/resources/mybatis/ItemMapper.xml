@@ -3,11 +3,16 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="zp.personal.shopping.mapper.ItemMapper">
-    <select id="getAllItems" resultType="zp.personal.shopping.bean.Item">
+    <resultMap id="ItemMap" type="zp.personal.shopping.bean.Item">
+        <id property="id" column="id"/>
+        <result column="name" property="name"/>
+        <association property="category" column="category_id" javaType="zp.personal.shopping.bean.Category" select="getCategoryById"/>
+    </resultMap>
+    <select id="getAllItems" resultMap="ItemMap">
         SELECT * FROM ITEMS
     </select>
 
-    <select id="getItemById" resultType="zp.personal.shopping.bean.Item">
+    <select id="getItemById" resultMap="ItemMap">
         SELECT * FROM ITEMS WHERE id = #{id}
     </select>
 
@@ -22,4 +27,8 @@
     <update id="updateItem" parameterType="zp.personal.shopping.bean.Item">
       UPDATE ITEMS SET name = #{name} WHERE id = #{id}
     </update>
+
+    <select id="getCategoryById" parameterType="int" resultType="zp.personal.shopping.bean.Category">
+        SELECT * FROM CATEGORIES WHERE id = #{id}
+    </select>
 </mapper>

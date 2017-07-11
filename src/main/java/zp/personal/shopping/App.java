@@ -14,11 +14,11 @@ public class App extends ResourceConfig {
         SqlSessionManager session = DBUtil.getSession();
         final ItemMapper itemMapper = session.getMapper(ItemMapper.class);
         packages("zp.personal.shopping.resource")
-                .register(new AbstractBinder() {
-                    @Override
-                    protected void configure() {
+            .register(new AbstractBinder() {
+                @Override
+                protected void configure() {
                         bind(itemMapper).to(ItemMapper.class);
                     }
-                });
+            });
     }
 }

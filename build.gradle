@@ -30,5 +30,15 @@ task clearDocker(type: Exec) {
     ignoreExitValue true
 }
 
+task startServer(type: Exec) {
+    workingDir "script"
+    commandLine "sh", "./start.sh"
+}
+
+task stopServer(type: Exec) {
+    workingDir "script"
+    commandLine "sh", "./stop.sh"
+}
+
 initDocker.dependsOn build
 initDocker.dependsOn clearDocker

@@ -11,6 +11,10 @@
         SELECT * FROM CATEGORIES WHERE id = #{id}
     </select>
 
+    <select id="getCategoryByName" resultType="zp.personal.shopping.bean.Category">
+        SELECT * FROM CATEGORIES WHERE name = #{name}
+    </select>
+
     <insert id="insertCategory" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO CATEGORIES(name) VALUES(#{name})
     </insert>

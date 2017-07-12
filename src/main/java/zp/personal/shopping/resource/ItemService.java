@@ -1,6 +1,8 @@
 package zp.personal.shopping.resource;
 
+import zp.personal.shopping.bean.Category;
 import zp.personal.shopping.bean.Item;
+import zp.personal.shopping.mapper.CategoryMapper;
 import zp.personal.shopping.mapper.ItemMapper;
 
 import javax.ws.rs.*;
@@ -15,6 +17,8 @@ import java.util.Map;
 public class ItemService {
     @Inject
     ItemMapper itemMapper;
+    @Inject
+    CategoryMapper categoryMapper;
 
     @GET
     @Path("/all")
@@ -45,8 +49,14 @@ public class ItemService {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Response createNewItem(Map itemMap) {
+        Map categoryMap = (Map)itemMap.get("category");
+        Category category = categoryMapper.getCategoryByName((String)categoryMap.get("name"));
+        if (category == null) {
+            return Response.status(404).build();
+        }
         Item item = new Item()
-            .setName((String)itemMap.get("name"));
+            .setName((String)itemMap.get("name"))
+            .setCategory(category);
         int result = itemMapper.insertItem(item);
         if(result == 0) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
@@ -72,13 +82,24 @@ public class ItemService {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateOrCreateItem(Map itemMap) {
+        Map categoryMap = (Map)itemMap.get("category");
+        Category category = categoryMapper.getCategoryByName((String)categoryMap.get("name"));
+        if (category == null) {
+            return Response.status(404).build();
+        }
+
         Integer id = (Integer) itemMap.get("id");
         if(id == null || itemMapper.getItemById(id) == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            Item item = new Item()
+                .setName((String)itemMap.get("name"))
+                .setCategory(category);
+            itemMapper.insertItem(item);
+            return Response.status(200).build();
         }
         Item item = new Item()
             .setId(id)
-            .setName((String)itemMap.get("name"));
+            .setName((String)itemMap.get("name"))
+            .setCategory(category);
         int result = itemMapper.updateItem(item);
         if(result == 0) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();

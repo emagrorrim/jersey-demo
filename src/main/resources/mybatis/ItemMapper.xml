@@ -17,7 +17,7 @@
     </select>
 
     <insert id="insertItem" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO ITEMS(name) VALUES(#{name})
+        INSERT INTO ITEMS(name, category_id) VALUES(#{name}, #{category.id})
     </insert>
 
     <delete id="deleteItemById" parameterType="int">
@@ -25,7 +25,7 @@
     </delete>
 
     <update id="updateItem" parameterType="zp.personal.shopping.bean.Item">
-      UPDATE ITEMS SET name = #{name} WHERE id = #{id}
+        UPDATE ITEMS SET name = #{name}, category_id = #{category.id} WHERE id = #{id}
     </update>
 
     <select id="getCategoryById" parameterType="int" resultType="zp.personal.shopping.bean.Category">

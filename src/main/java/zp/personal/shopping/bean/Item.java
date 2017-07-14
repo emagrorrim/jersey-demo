@@ -33,11 +33,4 @@ public class Item {
         this.category = category;
         return this;
     }
-
-    public HashMap<String, Object> toMap() {
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("id", this.getId());
-        map.put("name", this.getName());
-        return map;
-    }
 }

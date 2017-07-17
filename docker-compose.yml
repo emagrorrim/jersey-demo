@@ -1,10 +1,10 @@
 version: '2'
 services:
   mysql:
-    image: mysql:latest
+    image: mysql:5.7
     container_name: shop_database
     volumes:
-      - ./sql/init_database.sql:/docker-entrypoint-initdb.d/init_database.sql
+      - ./shopping-api/sql/init_database.sql:/docker-entrypoint-initdb.d/init_database.sql
     ports:
       - 3306:3306
     environment:
@@ -22,7 +22,7 @@ services:
     image: jetty:latest
     container_name: shopping_api
     volumes:
-      - ./build/libs/shopping-api-1.0.war:/var/lib/jetty/webapps/shopping-api.war
+      - ./build/libs/shopping-api-1.0.war:/var/lib/jetty/webapps/item-api.war
     links:
       - mysql:mysql
     ports:

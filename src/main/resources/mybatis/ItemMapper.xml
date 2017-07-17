@@ -16,8 +16,12 @@
         SELECT * FROM ITEMS WHERE id = #{id}
     </select>
 
+    <select id="getItemByName" resultMap="ItemMap">
+        SELECT * FROM ITEMS WHERE name = #{name}
+    </select>
+
     <insert id="insertItem" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO ITEMS(name, category_id) VALUES(#{name}, #{category.id})
+        INSERT INTO ITEMS(name, price, available, category_id) VALUES(#{name}, #{price}, #{available}, #{category.id})
     </insert>
 
     <delete id="deleteItemById" parameterType="int">
@@ -25,7 +29,12 @@
     </delete>
 
     <update id="updateItem" parameterType="zp.personal.shopping.bean.Item">
-        UPDATE ITEMS SET name = #{name}, category_id = #{category.id} WHERE id = #{id}
+        UPDATE ITEMS SET
+            name = #{name},
+            price = #{price},
+            available = #{available},
+            category_id = #{category.id}
+        WHERE id = #{id}
     </update>
 
     <select id="getCategoryById" parameterType="int" resultType="zp.personal.shopping.bean.Category">

@@ -15,7 +15,7 @@ dependencies {
     compile 'org.mybatis:mybatis:3.3.0'
     compile 'org.glassfish.jersey.media:jersey-media-json-jackson:2.22.1'
     compile 'org.glassfish.jersey.containers:jersey-container-servlet:2.22.1'
-    testCompile 'junit:junit:4.11'
+    testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:1.9.5'
 }
 
